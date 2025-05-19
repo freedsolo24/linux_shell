@@ -21,5 +21,30 @@ function last5Line {
   done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
 }
 
+# #function div7 {
+# #  for i in $seq(0 500);do
+# #    if [[ $((${i}%7)) -eq 0  ]];then
+#       echo -e -n "${i}\t"
+#     fi
+#   done
+#   echo
+# }
+
+function pln5 {
+  declare i=1
+
+  while read line;do 
+    if [ ${i} == 5 ];then 
+      echo "第5行: ${line}"
+    fi
+    i=$((${i}+1))
+  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+
+}
+
+
+
 readLine
 last5Line
+# div7
+pln5
