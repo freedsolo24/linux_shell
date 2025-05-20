@@ -42,9 +42,25 @@ function pln5 {
 
 }
 
+function plnnulllinenum {
+declare -i LINENUM
+LINENUM=1
+while read line;do 
+  if [ -z "${line}" ];then 
+    echo "空行的行号是: ${LINENUM}"
+    let LINENUM=${LINENUM}+1
+  else 
+    LINENUM=$((${LINENUM}+1))
+  fi
+
+done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+
+}
+
 
 
 readLine
 last5Line
 # div7
 pln5
+plnnulllinenum
