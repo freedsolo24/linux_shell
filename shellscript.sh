@@ -57,10 +57,28 @@ done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
 
 }
 
+function delnullline {
+  
+  while read LINE;do
+    if [[ "${LINE}" =~ ^$ ]];then    # 左侧必须有双引号，因为是字符串
+      continue
+    else 
+      echo "${LINE}"
+    fi
+  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+
+}
 
 
+echo -e "\033[31m打印文本文件的行数\033[0m"
 readLine
+echo -e "\033[31m打印最后5行\033[0m"
 last5Line
+echo -e "\033[31m打印0~500是7的倍数\033[0m"
 # div7
+echo -e "\033[31m打印第5行\033[0m"
 pln5
+echo -e "\033[31m打印空行的行号\033[0m"
 plnnulllinenum
+echo -e "\033[31m删除空行\033[0m"
+delnullline
