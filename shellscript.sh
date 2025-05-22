@@ -69,6 +69,17 @@ function delnullline {
 
 }
 
+function plnlt8 {
+  while read LINE;do
+    for I in $(echo ${LINE} | tr ' ' '\n');do
+      if [[ $(echo ${I} | wc -L) -lt 8 ]];then 
+        echo ${I}
+      fi
+    done
+    
+  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+}
+
 
 echo -e "\033[31m打印文本文件的行数\033[0m"
 readLine
@@ -82,3 +93,5 @@ echo -e "\033[31m打印空行的行号\033[0m"
 plnnulllinenum
 echo -e "\033[31m删除空行\033[0m"
 delnullline
+echo -e "\033[31m打印小于8个字母的单词\033[0m"
+plnlt8
