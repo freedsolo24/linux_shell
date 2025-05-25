@@ -1,10 +1,10 @@
-#!"C:\Program Files\Git\bin\bash.exe"
+#!/bin/bash
 
 function readLine {
 declare -i LINE=0
 while read p;do
   LINE=$(($LINE+1))
-done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+done < newcoder.txt
 echo "本文件的行数=$LINE"
 }
 
@@ -18,17 +18,17 @@ function last5Line {
       echo ${LINE}
     fi
     ROW=$((${ROW}-1))
-  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+  done < newcoder.txt
 }
 
-# #function div7 {
-# #  for i in $seq(0 500);do
-# #    if [[ $((${i}%7)) -eq 0  ]];then
-#       echo -e -n "${i}\t"
-#     fi
-#   done
-#   echo
-# }
+function div7 {
+ for i in $seq(0 500);do
+   if [[ $((${i}%7)) -eq 0  ]];then
+       echo -e -n "${i}\t"
+     fi
+   done
+   echo
+ }
 
 function pln5 {
   declare i=1
@@ -38,7 +38,7 @@ function pln5 {
       echo "第5行: ${line}"
     fi
     i=$((${i}+1))
-  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+  done < newcoder.txt
 
 }
 
@@ -53,7 +53,7 @@ while read line;do
     LINENUM=$((${LINENUM}+1))
   fi
 
-done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+done < newcoder.txt
 
 }
 
@@ -65,7 +65,7 @@ function delnullline {
     else 
       echo "${LINE}"
     fi
-  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+  done < newcoder.txt
 
 }
 
@@ -77,7 +77,7 @@ function plnlt8 {
       fi
     done
     
-  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+  done < newcoder.txt
 }
 
 
