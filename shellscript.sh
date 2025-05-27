@@ -12,7 +12,7 @@ function last5Line {
   declare -i ROW=0
   while read p;do
     ROW=$((${ROW}+1))
-  done < 'c:\Users\WXR\projects\linux_shell\newcoder.txt'
+  done < newcoder.txt
   while read LINE ;do
     if [ ${ROW} -le 5 -a ${ROW} -ge 1 ];then
       echo ${LINE}
@@ -22,7 +22,7 @@ function last5Line {
 }
 
 function div7 {
- for i in $seq(0 500);do
+ for i in $(seq 0 500);do
    if [[ $((${i}%7)) -eq 0  ]];then
        echo -e -n "${i}\t"
      fi
