@@ -80,6 +80,20 @@ function plnlt8 {
   done < newcoder.txt
 }
 
+function plnmem {
+
+  TOTAL=0
+
+   ITEMS=$(awk '{print $6}' ./mem.txt)
+
+   for I in ${ITEMS};do
+     TOTAL=$((${I}+${TOTAL}))
+   done
+
+   echo "进程占用的总内存是: ${TOTAL}"
+
+}
+
 
 echo -e "\033[31m打印文本文件的行数\033[0m"
 readLine
@@ -95,3 +109,6 @@ echo -e "\033[31m删除空行\033[0m"
 delnullline
 echo -e "\033[31m打印小于8个字母的单词\033[0m"
 plnlt8
+echo -e "\033[31m打印文本中的进程占用内存比\033[0m"
+plnmem
+
