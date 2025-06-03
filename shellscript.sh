@@ -94,6 +94,36 @@ function plnmem {
 
 }
 
+function countwordnums {
+  declare -A map
+
+  # IFS=intrnal field separator,IFS=' '不会去除行首和行尾的空格,明确把整行赋值给LINE变量
+  # 如果一行有多个连续空格, IFS=''可以完整保留
+  # -r=raw  对反斜杠, 不做转义,直接读取, 例如\\Username, 直接输出\\Username
+  # -a=array, 把每一行读到array变量, LINE变量是数组
+  while read -a LINE;do
+    for WORD in ${LINE[@]};do
+    # map[${WORD}]没有初始化,所以不能用 ${map[${WORD}]}
+ 
+        map[${WORD}]=$(( map[${WORD}] + 1 ))
+
+    done
+  done < ./nowcoder.txt
+
+      # echo ${map[nowcoder]}
+
+   # 遍历map中的每一个下标
+    for KEY in ${!map[@]};do
+
+         echo -e "The word of \033[31m\"${KEY}\"\033[0m have \033[31m${map[${KEY}]}\033[0m "
+          # echo "${KEY}"
+
+    done
+
+
+
+}
+
 
 echo -e "\033[31m打印文本文件的行数\033[0m"
 readLine
@@ -111,4 +141,6 @@ echo -e "\033[31m打印小于8个字母的单词\033[0m"
 plnlt8
 echo -e "\033[31m打印文本中的进程占用内存比\033[0m"
 plnmem
+echo -e "\033[31;42m统计每个单词出现的个数\033[0m"
+countwordnums
 
