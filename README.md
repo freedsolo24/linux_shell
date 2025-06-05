@@ -39,3 +39,10 @@
 * 注意1: map[${WORD}]没有初始值,不能用${map[${WORD}]}来取值
 * 注意2: map中用 map{!map[@]}取key,
 *               ${map[${key}]}取value
+### 010.统计一个nowcoder文件，第二列是否有重复，如果有重复有几个，并且提取重复的列
+* 思路
+  1. while 读取文件的每一行，放到数组变量
+  2. 判断把第二列的字符串放到map中的key，并且map的value+1
+  3. 此时已经把第二列放到了map中，map的key是第二列，map的value是第二列有几个
+  4. 这个时候可以遍历这个map进行测试
+  5. 遍历这个map,打印value>=2的,把对应的key和value打印出来

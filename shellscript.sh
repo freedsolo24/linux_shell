@@ -108,7 +108,7 @@ function countwordnums {
         map[${WORD}]=$(( map[${WORD}] + 1 ))
 
     done
-  done < ./nowcoder.txt
+  done < ./nowcoder_9.txt
 
       # echo ${map[nowcoder]}
 
@@ -119,7 +119,22 @@ function countwordnums {
           # echo "${KEY}"
 
     done
+}
 
+function column2repeat {
+  declare -A map
+
+  while IFS=' ' read -r -a LINE;do
+
+    map[${LINE[1]}]=$((map[${LINE[1]}] + 1))
+
+  done < ./nowcoder_10.txt
+  
+  for KEY in ${!map[@]};do
+    if [ ${map[${KEY}]} -ge 2 ];then
+       echo -e "第二列有重复的是: ${KEY}, 重复: ${map[${KEY}]}次"
+    fi
+  done
 
 
 }
@@ -143,4 +158,5 @@ echo -e "\033[31m打印文本中的进程占用内存比\033[0m"
 plnmem
 echo -e "\033[31;42m统计每个单词出现的个数\033[0m"
 countwordnums
-
+echo -e "\033[31;42m统计第二列是否重复\033[0m"
+column2repeat
