@@ -136,6 +136,21 @@ function column2repeat {
     fi
   done
 
+}
+
+function num11 {
+
+declare -a arr1
+declare -a arr2
+
+while IFS=' ' read -r -a arr;do
+
+  arr1[${#arr1[@]}]=${arr[0]}         # ${#arr1[@]} 等价于 len(arr1)
+  arr2[${#arr2[@]}]=${arr[1]}
+done < ./newcoder_11.txt
+
+  echo "${arr1[*]}"
+  echo "${arr2[*]}"
 
 }
 
@@ -160,3 +175,5 @@ echo -e "\033[31;42m统计每个单词出现的个数\033[0m"
 countwordnums
 echo -e "\033[31;42m统计第二列是否重复\033[0m"
 column2repeat
+echo -e "\033[31;42m统计转置内容\033[0m"
+num11
