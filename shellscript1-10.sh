@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function readLine {
+function shell01 {
 declare -i LINE=0
 while read p;do
   LINE=$(($LINE+1))
@@ -8,7 +8,7 @@ done < newcoder.txt
 echo "本文件的行数=$LINE"
 }
 
-function last5Line {
+function shell02 {
   declare -i ROW=0
   while read p;do
     ROW=$((${ROW}+1))
@@ -21,7 +21,7 @@ function last5Line {
   done < newcoder.txt
 }
 
-function div7 {
+function shell03 {
  for i in $(seq 0 500);do
    if [[ $((${i}%7)) -eq 0  ]];then
        echo -e -n "${i}\t"
@@ -30,7 +30,7 @@ function div7 {
    echo
  }
 
-function pln5 {
+function shell04 {
   declare i=1
 
   while read line;do 
@@ -42,7 +42,7 @@ function pln5 {
 
 }
 
-function plnnulllinenum {
+function shell05 {
 declare -i LINENUM
 LINENUM=1
 while read line;do 
@@ -57,7 +57,7 @@ done < newcoder.txt
 
 }
 
-function delnullline {
+function shell06 {
   
   while read LINE;do
     if [[ "${LINE}" =~ ^$ ]];then    # 左侧必须有双引号，因为是字符串
@@ -69,7 +69,7 @@ function delnullline {
 
 }
 
-function plnlt8 {
+function shell07 {
   while read LINE;do
     for I in $(echo ${LINE} | tr ' ' '\n');do
       if [[ $(echo ${I} | wc -L) -lt 8 ]];then 
@@ -80,7 +80,7 @@ function plnlt8 {
   done < newcoder.txt
 }
 
-function plnmem {
+function shell08 {
 
   TOTAL=0
 
@@ -94,7 +94,7 @@ function plnmem {
 
 }
 
-function countwordnums {
+function shell09 {
   declare -A map
 
   # IFS=intrnal field separator,IFS=' '不会去除行首和行尾的空格,明确把整行赋值给LINE变量
@@ -121,7 +121,7 @@ function countwordnums {
     done
 }
 
-function column2repeat {
+function shell10 {
   declare -A map
 
   while IFS=' ' read -r -a LINE;do
@@ -138,42 +138,26 @@ function column2repeat {
 
 }
 
-function num11 {
 
-declare -a arr1
-declare -a arr2
-
-while IFS=' ' read -r -a arr;do
-
-  arr1[${#arr1[@]}]=${arr[0]}         # ${#arr1[@]} 等价于 len(arr1)
-  arr2[${#arr2[@]}]=${arr[1]}
-done < ./newcoder_11.txt
-
-  echo "${arr1[*]}"
-  echo "${arr2[*]}"
-
-}
 
 
 echo -e "\033[31m打印文本文件的行数\033[0m"
-readLine
+shell01
 echo -e "\033[31m打印最后5行\033[0m"
-last5Line
+shell02
 echo -e "\033[31m打印0~500是7的倍数\033[0m"
-# div7
+shell03
 echo -e "\033[31m打印第5行\033[0m"
-pln5
+shell04
 echo -e "\033[31m打印空行的行号\033[0m"
-plnnulllinenum
+shell05
 echo -e "\033[31m删除空行\033[0m"
-delnullline
+shell06
 echo -e "\033[31m打印小于8个字母的单词\033[0m"
-plnlt8
+shell07
 echo -e "\033[31m打印文本中的进程占用内存比\033[0m"
-plnmem
+shell08
 echo -e "\033[31;42m统计每个单词出现的个数\033[0m"
-countwordnums
+shell09
 echo -e "\033[31;42m统计第二列是否重复\033[0m"
-column2repeat
-echo -e "\033[31;42m统计转置内容\033[0m"
-num11
+shell10
