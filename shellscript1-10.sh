@@ -2,7 +2,7 @@
 
 function shell01 {
 declare -i LINE=0
-while read p;do
+while read p || [[ -n ${p} ]];do
   LINE=$(($LINE+1))
 done < newcoder.txt
 echo "本文件的行数=$LINE"
@@ -10,7 +10,7 @@ echo "本文件的行数=$LINE"
 
 function shell02 {
   declare -i ROW=0
-  while read p;do
+  while read p|| [[ -n ${p} ]];do
     ROW=$((${ROW}+1))
   done < newcoder.txt
   while read LINE ;do
@@ -33,7 +33,7 @@ function shell03 {
 function shell04 {
   declare i=1
 
-  while read line;do 
+  while read line|| [[ -n ${line} ]];do 
     if [ ${i} == 5 ];then 
       echo "第5行: ${line}"
     fi
@@ -45,7 +45,7 @@ function shell04 {
 function shell05 {
 declare -i LINENUM
 LINENUM=1
-while read line;do 
+while read line|| [[ -n ${line} ]];do 
   if [ -z "${line}" ];then 
     echo "空行的行号是: ${LINENUM}"
     let LINENUM=${LINENUM}+1
@@ -59,7 +59,7 @@ done < newcoder.txt
 
 function shell06 {
   
-  while read LINE;do
+  while read LINE|| [[ -n ${LINE} ]];do
     if [[ "${LINE}" =~ ^$ ]];then    # 左侧必须有双引号，因为是字符串
       continue
     else 
@@ -70,7 +70,7 @@ function shell06 {
 }
 
 function shell07 {
-  while read LINE;do
+  while read LINE || [[ -n ${LINE} ]];do
     for I in $(echo ${LINE} | tr ' ' '\n');do
       if [[ $(echo ${I} | wc -L) -lt 8 ]];then 
         echo ${I}
@@ -101,14 +101,14 @@ function shell09 {
   # 如果一行有多个连续空格, IFS=''可以完整保留
   # -r=raw  对反斜杠, 不做转义,直接读取, 例如\\Username, 直接输出\\Username
   # -a=array, 把每一行读到array变量, LINE变量是数组
-  while read -a LINE;do
+  while read -a LINE|| [[ -n ${LINE[*]} ]];do
     for WORD in ${LINE[@]};do
     # map[${WORD}]没有初始化,所以不能用 ${map[${WORD}]}
  
         map[${WORD}]=$(( map[${WORD}] + 1 ))
 
     done
-  done < ./nowcoder_9.txt
+  done < ./newcoder_9.txt
 
       # echo ${map[nowcoder]}
 
@@ -124,11 +124,11 @@ function shell09 {
 function shell10 {
   declare -A map
 
-  while IFS=' ' read -r -a LINE;do
+  while IFS=' ' read -r -a LINE|| [[ -n ${LINE[*]} ]];do
 
     map[${LINE[1]}]=$((map[${LINE[1]}] + 1))
 
-  done < ./nowcoder_10.txt
+  done < ./newcoder_10.txt
   
   for KEY in ${!map[@]};do
     if [ ${map[${KEY}]} -ge 2 ];then

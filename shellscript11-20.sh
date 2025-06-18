@@ -5,7 +5,7 @@ function shell11 {
 declare -a arr1
 declare -a arr2
 
-while IFS=' ' read -r -a arr;do
+while IFS=' ' read -r -a arr || [[ -n ${arr[*]} ]];do
 
   arr1[${#arr1[@]}]=${arr[0]}         # ${#arr1[@]} 等价于 len(arr1)
   arr2[${#arr2[@]}]=${arr[1]}
@@ -21,7 +21,7 @@ function shell12 {
   LINENUM=1
   declare -a array
 
-  while read LINE;do
+  while read LINE || [[ -n ${line} ]];do
     len=$(echo "${LINE}" | wc -L)
 
     for ((i=0;i<${len};i++));do
@@ -47,7 +47,39 @@ function shell12 {
 
 }
 
+function shell13 {
+
+declare -i has_this
+declare -a words
+
+# IFS=' '       意思是让空格成为每行单词的分隔符
+# read -a line  把line变量变成数组, 变为数组后不会保留整行内容, line此时是数组不是字符串
+
+while IFS=' ' read -r -a line || [[ -n ${line[*]} ]]; do
+  has_this=0
+  #words=(${line})
+
+# 
+  for word in ${line[@]}; do
+    if [[ "${word}" == "this" ]]; then
+      has_this=1
+      break
+    fi
+  done
+
+  if [[ ${has_this} -eq 0 ]]; then
+  # 现在${line}是数组不是字符串, 如果打印${line}, 实际输出的是$line[0], 也就是数组的第一个单词
+  # 所以要打印${line[*]}
+    echo "${line[*]}"
+  fi
+done < ./newcoder_13.txt
+
+}
+
 echo -e "\033[31;42m统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42m每一行出现的1~5数字的个数\033[0m"
 shell12
+echo -e "\033[31;42m不输出含有this的语句输出\033[0m"
+shell13
+
