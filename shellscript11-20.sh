@@ -76,10 +76,36 @@ done < ./newcoder_13.txt
 
 }
 
+function shell14 {
+# row定义有几行
+row=0
+# num定义有几个数字
+num=0
+# sum定义除第一行后的和
+sum=0
+
+  while read line || [[ -n ${line} ]];do
+  # row=1, 说明现在是第一行, 赋值给num
+    if [[ row -eq 0 ]];then 
+      num=${line} 
+    else
+      sum=$((${sum}+${line}))
+    fi
+      ((row++))
+  done < ./newcoder_14.txt
+
+  echo "scale=3;${sum}/${num}" | bc
+  echo "row: ${row}"
+
+
+}
+
 echo -e "\033[31;42m统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42m每一行出现的1~5数字的个数\033[0m"
 shell12
 echo -e "\033[31;42m不输出含有this的语句输出\033[0m"
 shell13
+echo -e "\033[31;42m\033[0m"
+shell14
 
