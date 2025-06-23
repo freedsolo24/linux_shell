@@ -100,12 +100,33 @@ sum=0
 
 }
 
+function shell15() {
+
+declare -a words
+
+    while IFS='' read line || [[ -n ${line} ]];do
+      words=(${line})
+
+      for word in ${words[@]};do
+         
+         if [[ ${word} =~ ^.*[Bb].*$ ]];then
+           continue
+         else
+           echo "${word}"
+         fi
+      done
+
+    done < ./newcoder_15.txt
+
+}
+
 echo -e "\033[31;42m统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42m每一行出现的1~5数字的个数\033[0m"
 shell12
 echo -e "\033[31;42m不输出含有this的语句输出\033[0m"
 shell13
-echo -e "\033[31;42m\033[0m"
+echo -e "\033[31;42m求平均值\033[0m"
 shell14
-
+echo -e "\033[31;42m去掉不需要的单词\033[0m"
+shell15
