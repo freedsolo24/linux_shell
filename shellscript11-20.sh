@@ -135,6 +135,55 @@ function shell16() {
 
 }
 
+function shell17() {
+  # while read l || [[ -n ${l} ]];do
+  #   f=$(echo "${l}" | awk -F: '{print NF}')
+  
+  #   while [ ${f} -gt 0 ];do
+  #     if [[ ${f} -ne 1 ]];then
+  #       echo -n "$(echo ${l} | cut -d ':' -f ${f}):"
+  #     else 
+  #       echo -n "$(echo "${l}" | cut -d ':' -f ${f})"
+  #     fi
+  #     f=$((${f}-1))
+  #   done 
+  #      echo ""
+  # done < ./newcoder_17.txt
+ 
+# while IFS=':' read -r -a line; do
+#   rev=()
+#   for ((i = 0; i < ${#line[@]}; i++)); do
+#     rev=("${line[$i]}":"${rev[@]}")
+#   done
+#   echo "${rev[*]}"
+# done < ./newcoder_17.txt
+
+declare -a strarr
+while read line || [[ -n ${line} ]];do
+  nf=$(echo "${line}" |awk -F":" '{print NF}')
+  i=1
+  while ((i>=1 && i<=${nf}));do
+    elem=$(echo "${line}"|cut -d":" -f $i)
+    idx=$((${nf}-${i}))
+    lastidx=$((${nf}-1))
+    
+    if [ ${idx} -eq ${lastidx} ];then
+      strarr[${idx}]=${elem}
+    else
+      strarr[${idx}]=${elem}"+"
+    fi
+    let i++
+  done
+  result=${strarr[*]}
+  echo "${result}"
+  # echo ${result//+ /:}
+
+done < newcoder_17.txt
+
+
+
+}
+
 echo -e "\033[31;42m统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42m每一行出现的1~5数字的个数\033[0m"
@@ -147,3 +196,5 @@ echo -e "\033[31;42m去掉不需要的单词\033[0m"
 shell15
 echo -e "\033[31;42m判断输入是否为ip地址\033[0m"
 shell16
+echo -e "\033[31;42m将字段逆序输出\033[0m"
+shell17
