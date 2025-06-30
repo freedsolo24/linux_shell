@@ -1,4 +1,15 @@
 # Linux_shell
+```bash
+# while IFS=' ' read -r -a line || [[ -n ${line[*]} ]]
+# 这个line是一个数组, 变为数组后不会保留整行内容, line此时是数组不是字符串
+# while         read line || [[ -n ${line} ]]
+# 这个line是一个字符串
+---
+# ${arr[@]}	     展开所有元素，每个是独立参数
+# ${arr[*]}	     展开所有元素为一个字符串（用空格拼接）, 想把数组拼成一个字符串
+# "${arr[@]}"	  每个元素保留独立性（推荐用于 for 等）,想逐个处理数组元素
+# "${arr[*]}"	  所有元素拼成一个字符串，只有一个参数
+```
 ## 001. 打印文本文件的行数
 1. 通过while true 读取每一行
 2. 读完一行变量加1，最后打印变量的值就是行数
@@ -141,8 +152,16 @@ root:*:0:0:System Administrator:/var/root:/bin/sh
      把数组封装到result里面, result就是一个字符串了
      然后再用字符串进行替换
 
-${arr[@]}	  展开所有元素，每个是独立参数
-"${arr[@]}"	每个元素保留独立性（推荐用于 for 等）,想逐个处理数组元素
-${arr[*]}	  展开所有元素为一个字符串（用空格拼接）, 想把数组拼成一个字符串
-"${arr[*]}"	所有元素拼成一个字符串，只有一个参数
-
+### 018. 域名进行计数排序处理
+```bash
+http://www.nowcoder.com/index.html
+http://www.nowcoder.com/1.html
+http://m.nowcoder.com/index.html
+```
+* 思路
+1. 遍历文件的每一行, 读取成一个字符串
+2. 通过sed，或者字符串操作，只打印域名
+3. 新建一个map
+4. 把每一行放入map中的key，对应的value+1
+5. 最后打印这个map，key就是域名，value就是有几个
+6. 输出的结果用sort排序

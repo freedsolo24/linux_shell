@@ -179,9 +179,37 @@ while read line || [[ -n ${line} ]];do
   # echo ${result//+ /:}
 
 done < newcoder_17.txt
+}
 
+function shell18() {
+ 
+#  while read line || [[ -n ${line} ]];do
+#    line1=${line#*://}
+   
+#    line2=${line1%%/*}
 
+#    echo "${line2}"
+#  done < ./newcoder_18.txt
+declare -A map
 
+while read line || [[ -n ${line} ]];do
+  line1=$(echo "${line}" | sed -E -n 's#^https?://##p')
+  line2=$(echo "${line1}" | sed -n 's#/.*##p')
+
+  map[${line2}]=$((map[${line2}]+1))
+
+  # if [[-z  ${map[${line2}]}  ]];then 
+
+  #     map[${line2}]=1
+  # else
+  #     map[${line2}]=$((map[${line2}]+1))
+  # fi
+
+done < ./newcoder_18.txt
+
+  for i in "${!map[@]}";do
+    echo "${map[${i}]} ${i}" 
+  done | sort -rk1
 }
 
 echo -e "\033[31;42m统计转置内容\033[0m"
@@ -198,3 +226,5 @@ echo -e "\033[31;42m判断输入是否为ip地址\033[0m"
 shell16
 echo -e "\033[31;42m将字段逆序输出\033[0m"
 shell17
+echo -e "\033[31,42m域名进行计数排序处理\033[0m"
+shell18
