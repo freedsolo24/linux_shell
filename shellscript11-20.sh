@@ -212,6 +212,20 @@ done < ./newcoder_18.txt
   done | sort -rk1
 }
 
+function shell19() {
+  
+for(( i=1; i<=${1}; i++ ));do
+    for ((j=1;j<=${1}-${i};j++));do
+      echo -n -e "\033[42m \033[0m"
+    done
+    for ((k=${i};k>=1;k--));do
+      echo -n -e "\033[31;42m* \033[0m"
+    done
+    echo ""
+done
+
+}
+
 echo -e "\033[31;42m统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42m每一行出现的1~5数字的个数\033[0m"
@@ -228,3 +242,5 @@ echo -e "\033[31;42m将字段逆序输出\033[0m"
 shell17
 echo -e "\033[31,42m域名进行计数排序处理\033[0m"
 shell18
+echo -e "\033[31,42m打印等腰三角形\033[0m"
+shell19 6
