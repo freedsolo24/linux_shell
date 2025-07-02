@@ -1,14 +1,26 @@
 # Linux_shell
 ```bash
 # while IFS=' ' read -r -a line || [[ -n ${line[*]} ]]
+# -r 为了防止 \ 被bash解释
 # 这个line是一个数组, 变为数组后不会保留整行内容, line此时是数组不是字符串
-# while         read line || [[ -n ${line} ]]
-# 这个line是一个字符串
+
+# for val in "${line[@]}"; do echo "${val}" done
+# 遍历数组, ${val}, 拿的就是每个value
+# for idx in "${!line[@]}"; 
+# 遍历数组, index=${idx}拿的是索引, value=${line[${idx}]}拿的是值
+#          len=${#line[@]}拿的是数组的长
 ---
-# ${arr[@]}	     展开所有元素，每个是独立参数
-# ${arr[*]}	     展开所有元素为一个字符串（用空格拼接）, 想把数组拼成一个字符串
-# "${arr[@]}"	  每个元素保留独立性（推荐用于 for 等）,想逐个处理数组元素
-# "${arr[*]}"	  所有元素拼成一个字符串，只有一个参数
+# while         read -r line || [[ -n ${line} ]]
+# 这个line是一个字符串
+# for ((i = 0; i < ${#line}; i++)); do char="${line:i:1}" done
+# 遍历字符串, ${line}是一行字符串, len=${#line}是字符串的长度, index=${i}是字符串的索引, char=${line:i:1}
+---
+# ${arr[@]}	     展开所有value，每个是独立的value
+# ${arr[*]}	     展开所有value为一个字符串（用空格拼接）, 想把数组拼成一个字符串
+# "${arr[@]}"	  每个value保留独立性（推荐用于 for 等）,想逐个处理数组中的value
+# "${arr[*]}"	  所有value拼成一个字符串，只有一个参数
+# "${!arr[@]}"   拿数组所有的index
+# "${#arr[@]}"   拿数组有多少个元素 
 ```
 ## 001. 打印文本文件的行数
 1. 通过while true 读取每一行
