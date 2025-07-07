@@ -205,6 +205,27 @@ done
 
 }
 
+function shell20() {
+
+declare -i count
+declare -i len
+
+while read -r line || [[ -n ${line} ]];do
+  len=${#line}
+  count=0
+  for((i=0;i<len;i++));do
+    char=${line:i:1}
+    if [[ ${char} =~ [0-9] ]];then
+      count=$((count+1))
+    fi
+  done
+  if [[ ${count} -eq 1 ]]; then
+      echo "仅有一个数字的行: ${line}"
+  fi
+done < ./newcoder_20.txt
+
+}
+
 echo -e "\033[31;42mshell11 统计转置内容\033[0m"
 shell11
 echo -e "\033[31;42mshell12 每一行出现的1~5数字的个数\033[0m"
@@ -223,3 +244,5 @@ echo -e "\033[31;42mshell18 域名进行计数排序处理\033[0m"
 shell18
 echo -e "\033[31;42mshell19 打印等腰三角形\033[0m"
 shell19 6
+echo -e "\033[31;42mshell20 打印只有一个数字的行\033[0m"
+shell20 
