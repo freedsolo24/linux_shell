@@ -233,5 +233,10 @@ http://m.nowcoder.com/index.html
 2. 构建map, key是数组的[0]元素, value是数组的[1]元素, 相同的key可以追加value
 3. 遍历map, 先打印key.
    根据key遍历map的value, 打印每一个value
-
-
+### 023. nginx日志分析-IP访问次数统计
+现在需要编写 Shell 脚本统计出 2020 年 4 月 23 号访问 IP 的对应次数，并且按照次数降序排序。
+* 思路
+1. 建立map
+2. while true 读每一行
+3. 判断日期
+4. 放到map中++
