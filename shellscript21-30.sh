@@ -33,15 +33,27 @@ for key in $(echo "${!map[@]}" | sort -n);do
         echo "${value}"
     done
 done
-
-
-
-
-
-
 }
+
+function shell23() {
+declare -A map
+while IFS=' ' read -r -a arr || [[ -n ${arr[*]} ]];do
+    
+        if [[ "${arr[3]}" =~ \[23/Apr/2020 ]];then
+            map["${arr[0]}"]=$((${map["${arr[0]}"]}+1))  
+        fi
+done < ./newcoder_23.txt
+        for key in "${!map[@]}";do
+            echo " ${map[${key}]}  ${key} "
+        done | sort -nr
+}
+
+
+
 
 echo -e "\033[31;42mshell21 格式化输出\033[0m"
 shell21
 echo -e "\033[31;42mshell22 处理文本\033[0m"
 shell22
+echo -e "\033[31;42mshell23 nginx日志分析-统计ip次数\033[0m"
+shell23
